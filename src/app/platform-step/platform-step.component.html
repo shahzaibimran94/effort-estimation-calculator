@@ -1,0 +1,42 @@
+<div class="platforms">  
+  <h2 class="heading"> What type of app are you building? </h2>
+  <div class="platforms-holder">
+      <div class="option {{ mainService.platformSelected === 'Android' ? 'active' : '' }}" (click)="mainService.platformSelected = 'Android'">
+          <span class="text">Android</span>
+          <div class="icon-holder" >
+              <div class="icon android" role="img" aria-hidden="true">
+                  <img src="assets/images/android.png" *ngIf="mainService.platformSelected === '' || mainService.platformSelected !== 'Android'" />
+                  <img src="assets/images/android_color.png" *ngIf="mainService.platformSelected === 'Android'" />
+              </div>
+          </div>
+      </div>
+      <div class="option {{ mainService.platformSelected === 'iOS' ? 'active' : '' }}" (click)="mainService.platformSelected = 'iOS'">
+          <span class="text">iOS</span>
+          <div class="icon-holder">
+              <div class="icon ios">
+                  <img src="assets/images/ios.png" *ngIf="mainService.platformSelected === '' || mainService.platformSelected !== 'iOS'" />
+                  <img src="assets/images/ios_color.png" *ngIf="mainService.platformSelected === 'iOS'" />
+              </div>
+          </div>
+      </div>
+      <div class="option {{ mainService.platformSelected === 'Both' ? 'active' : '' }}" (click)="mainService.platformSelected = 'Both'">
+          <span class="text">Both</span>
+          <div class="icon-holder both">
+              <div class="icon android" role="img">
+                    <img src="assets/images/android.png" *ngIf="mainService.platformSelected === '' || mainService.platformSelected !== 'Both'" />
+                    <img src="assets/images/android_color.png" *ngIf="mainService.platformSelected === 'Both'" />
+              </div>
+              <div class="icon ios" role="img" aria-hidden="true">
+                    <img src="assets/images/ios.png" *ngIf="mainService.platformSelected === '' || mainService.platformSelected !== 'Both'" />
+                    <img src="assets/images/ios_color.png" *ngIf="mainService.platformSelected === 'Both'" />
+              </div>
+          </div>
+      </div>
+  </div>
+  <button 
+      (click)="continue()"
+      class="continue" 
+      style="border: 0px; border-radius: 0px 4px; transition: background-color 0.5s ease 0s; box-shadow: none; outline: none; font-weight: 700; letter-spacing: 0.13em; font-size: 10px; height: 50px; width: 229px; color: rgb(67, 76, 99); position: absolute; overflow: hidden; background-color: rgb(250, 250, 251);">
+      <span class="text">Save and continue</span><i class="fas fa-arrow-right"></i>
+  </button>
+</div>

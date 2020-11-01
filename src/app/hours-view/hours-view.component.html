@@ -1,0 +1,68 @@
+<div class="sidebar__handle" (click)="toggle.emit('any')">
+    <div class="sidebar__handle__icon"><i class="fas fa-chevron-up"></i></div>
+    <div class="sidebar__handle__text">Estimate</div>
+</div>
+<div class="hours-report-block">
+    <div>
+        <div class="hours-report">
+            <div class="time-section time-total">
+                <div class="description"> Summary time </div>
+                <div class="time">
+                    <div class="average">
+                        <div>
+                            <div class="odometer-like"><span class="spin-entry"> {{ (devHours + nonDevHours).toFixed(1) }}h </span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-accordion">
+                <div class="expansion-panel">
+                    <div class="expansion-panel-header" style="height: 79px;">
+                        <span class="wrapper-content">
+                            <div class="time-section"><div  class="description"> Development time </div>
+                                <div class="time">
+                                    <div  class="average">
+                                        <div >
+                                            <div class="odometer-like"><span class="spin-entry"> {{ devHours.toFixed(1) }}h </span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="expansion-indicator" style="transform: rotate(0deg);"></span>
+                    </div>
+                    <div class="expansion-panel-content" style="height: 0px; visibility: hidden;">
+                        <div class="expansion-panel-body">
+                            <div class="time-estimations-holder">
+                                <div>
+                                    <div class="transparent-borders">
+                                        <section class="time-estimations-inner">
+                                            <div class="time-estimation no-line" style="">
+                                                <div class="description">No features selected</div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expansion-panel">
+                    <div class="expansion-panel-header" style="height: 79px;">
+                        <span class="wrapper-content">
+                            <div class="time-section"><div  class="description"> Non-dev<br> time </div>
+                                <div  class="time">
+                                    <div  class="average">
+                                        <div >
+                                            <div  class="odometer-like"><span class="spin-entry"> {{ nonDevHours.toFixed(1) }}h </span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div style="height: 100%">
+    <div class="designs" >
+        <h2 class="heading"> Do you need a design for your App? </h2>
+        <div class="designs-holder">
+            <div class="option {{ mainService.designSelected == '0' ? 'active' : '' }}" (click)="mainService.designSelected = '0'">
+                <div class="texts-holder">
+                    <div class="design-type"> None </div>
+                    <div class="hours-addition"> +0 hours </div>
+                </div>
+                <div class="icon-holder">
+                    <div class="icon none" role="img" aria-hidden="true">
+                        <img src="assets/images/grey_icon.png" *ngIf="mainService.designSelected === '' || mainService.designSelected !== '0'" />
+                        <img src="assets/images/red_icon.png" *ngIf="mainService.designSelected === '0'" />
+                    </div>
+                </div>
+            </div>
+            <div class="option {{ mainService.designSelected == '1' ? 'active' : '' }}" (click)="mainService.designSelected = '1'" >
+                <div class="texts-holder">
+                    <div class="design-type"> Simple </div>
+                    <div class="hours-addition"> +{{ mainService.designHours.toFixed(1) }} hours </div>
+                </div>
+                <div class="icon-holder">
+                    <div class="icon simple" role="img" aria-hidden="true">
+                        <img src="assets/images/grey_icon.png" *ngIf="mainService.designSelected === '' || mainService.designSelected !== '1'" />
+                        <img src="assets/images/blue_icon.png" *ngIf="mainService.designSelected === '1'" />
+                    </div>
+                </div>
+            </div>
+            <div class="option {{ mainService.designSelected == '3' ? 'active' : '' }}" (click)="mainService.designSelected = '3'">
+                <div class="texts-holder">
+                    <div class="design-type"> Custom </div>
+                    <div class="hours-addition"> +{{ (mainService.designHours * 3).toFixed(1) }} hours </div>
+                </div>
+                <div class="icon-holder">
+                    <div  class="icon custom" role="img" aria-hidden="true">
+                        <img src="assets/images/design_three_grey.png" *ngIf="mainService.designSelected === '' || mainService.designSelected !== '3'" />
+                        <img src="assets/images/design_three.png" *ngIf="mainService.designSelected === '3'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button 
+            (click)="getEstimate()" 
+            class="continue" 
+            continue-button="" 
+            name="A button" 
+            style="border: 0px; border-radius: 0px 4px; transition: background-color 0.5s ease 0s; box-shadow: none; outline: none; font-weight: 700; letter-spacing: 0.13em; font-size: 10px; height: 50px; width: 229px; color: rgb(67, 76, 99); position: absolute; overflow: hidden; background-color: rgb(250, 250, 251);"> Get estimate </button>
+    </div>
+</div>

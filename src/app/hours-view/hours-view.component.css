@@ -1,0 +1,6 @@
+.spin-entry {
+    transition: transform .5s;
+}
+.spin-entry .out-viewport {
+    transform: translateY(-100%);
+}

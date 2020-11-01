@@ -1,0 +1,89 @@
+<div class="calculator-wrapper">
+    <div class="categories">
+        <div class="top-block">
+            <a class="go-back" (click)="back.emit(true)"><i  class="fas fa-angle-left"></i><span >Back</span></a>
+            <h2 class="heading">Rough Estimate of My App</h2>
+        </div>
+        <div class="categories-holder">
+            <div class="main-area second-main">
+                <div class="stats-container">
+                    <div class="time-block summary-time-block">
+                        <div class="average">
+                            <div class="title"><img alt="An image" class="icon" src="https://www.cleveroad.com/assets/images/calculator/icon-watch.png"><span>Summary time</span></div>
+                            <div class="value"><span class="digits">{{ totalHours.toFixed(1) }}</span><span class="measure">hours</span></div>
+                        </div>
+                        <div class="boundaries">
+                            <div class="optimistic">
+                                <div class="title">Optimistic</div>
+                                <div class="value">{{ (totalHoursObj.min).toFixed(1) }}h</div>
+                            </div>
+                            <div class="pessimistic">
+                                <div class="title">Pessimistic</div>
+                                <div class="value">{{ (totalHoursObj.max).toFixed(1) }}h</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-date-block">
+                        <div class="prediction"> 
+                            Estimated release date <span class="highlighted">{{ completionDate }}</span> 
+                            <!-- Leave request to start a project in 2 days  -->
+                        </div>
+                        <!-- <button class="free-quote"> Free Quote </button> -->
+                    </div>
+                    <div class="time-block dev-time-block">
+                        <div class="average">
+                            <div class="title"><span>Development price</span></div>
+                            <div class="value"><span class="digits"> $ {{ totalCost }}  </span></div>
+                        </div>
+                        <div class="boundaries">
+                            <div class="optimistic">
+                                <div class="title">Minimum</div>
+                                <div class="value"> $ {{ totalCostObj.min }} </div>
+                            </div>
+                            <div class="pessimistic">
+                                <div class="title">Maximum</div>
+                                <div class="value"> $ {{ totalCostObj.max }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-container">
+                    <div class="team-heading"><img alt="An image" class="icon" src="https://www.cleveroad.com/assets/images/calculator/icon-team.png"><span>Your dedicated team</span></div>
+                    <div class="team-list">
+                        <div class="team-member" *ngFor="let team of teamList">{{ team }}</div>
+                    </div>
+                </div>
+                <div class="pdf-container">
+                    <div class="pdf-block"><img alt="An image" class="pdf-icon" src="https://www.cleveroad.com/assets/images/calculator/icon-pdf.png">
+                        <div class="pdf-description"> Download your Rough Estimate with full Features list </div>
+                        <div class="pdf-subscription">
+                            <button class="pdf-download" (click)="showModal = true"> Download PDF </button>
+                        </div>
+                        <!-- <a class="pdf-example" target="blank" href="https://www.cleveroad.com/assets/data/estimate-example.pdf"> Watch the example </a> -->
+                    </div>
+                    <!-- <div class="socials-block">
+                        <div class="socials-title"> Share this page </div>
+                        <div class="social-actions"><a class="social-twitter" href="https://twitter.com/intent/tweet?text=My%20App%20will%20cost%20%2414519.%20How%20much%20will%20your%20project%20cost%3F%20Let%E2%80%99s%20compare!&amp;url=https%3A%2F%2Fwww.cleveroad.com%2Fmobile-app-development-cost-calculator%2Fresults%2FZQb-1AkCo&amp;via=cleveroad"><i class="fab fa-twitter"></i><span >Twitter</span></a>
+                            <button class="social-facebook"><i class="fab fa-facebook-f"></i><span>Facebook</span></button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="pdf-subscription modal" *ngIf="showModal">
+                <p [style.margin]="'0'" [style.textAlign]="'center'" *ngIf="loading">Processing...</p>
+                <p class="message" *ngIf="message">{{ message }}</p>
+                <p class="cross-icon" (click)="showModal = false;message = ''">&#x2715;</p>
+                <div class="head-sec">
+                    <p>Enter Email To Get It Now</p>
+                </div>
+                <div class="input-sec">
+                    <label>Email:</label>
+                    <input type="text" placeholder="Email Address" #Email (input)="Email.value = Email.value"/>
+                </div>
+                <div class="btn-sec">
+                    <button class="pdf-download" (click)="sendEmail(Email.value)" [disabled]="loading || !Email.value || (Email.value && (!Email.value.includes('@') || !Email.value.split('@')[1].includes('.')))"> Download PDF </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="calculator-wrapper">
+    <div class="categories">
+        <div class="top-block">
+            <a class="go-back" (click)="clearAppType.emit('')" ><i  class="fas fa-angle-left"></i><span >Back</span></a>
+            <h2 class="heading">Choose Application</h2>
+        </div>
+        <div class="categories-holder">
+            <ng-container *ngFor="let tile of appTiles; let i = index;">
+                <div 
+                    class="category" 
+                    *ngIf="tile.app === 'existing'" 
+                    (click)="selectedTile(tile.name)">
+                    <img alt="An image" class="category-picture" [src]="tile.img">
+                </div>
+                <div 
+                    class="category with-title ng-star-inserted"  
+                    *ngIf="tile.app === 'business'"
+                    (click)="selectedTile(tile.name)">
+                    <img alt="An image" class="category-picture" loading="lazy" [src]="tile.img">
+                    <div class="category-title ng-star-inserted"> {{ tile.name }} </div>
+                </div>        
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,282 @@
+<div class="calculator-wrapper">
+    <div class="steps-wrapper">
+        <div class="main-area">
+            <app-calc-header 
+                (back)="moveBackward()" 
+                [currentStep]="mainService.currentStep"
+                [steps]="mainService.selectedTileDetail ? mainService.selectedTileDetail.length + 2 : 0"></app-calc-header>
+            <div class="question {{ open ? 'open' : '' }}">
+                <ng-container *ngIf="open">
+                    <app-platform-step *ngIf="mainService.currentStep === 1"></app-platform-step>
+                    <app-dynamic-ques 
+                        *ngIf="mainService.currentStep > 1 && mainService.currentStep < (mainService.selectedTileDetail.length+2)"></app-dynamic-ques>
+                    <app-design-step
+                        (complete)="completed.emit($event)"
+                        *ngIf="mainService.currentStep == (mainService.selectedTileDetail.length+2)"></app-design-step>
+                    <div class="progress-bar-wrapper">
+                        <div 
+                            class="progress-bar"
+                            [style.width.%]="(mainService.currentStep*100)/(mainService.selectedTileDetail.length+2)" 
+                            style="height: 2px; display: flex; background: #ff9f00;">
+                            <!-- <svg viewBox="0 0 100 1" preserveAspectRatio="none" style="display: block; width: 100%;">
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+                                        <stop offset="5%" stop-color="#FF9F00"></stop>
+                                        <stop offset="95%" stop-color="#FF9F00"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 0,0.5 L 100,0.5" stroke="url(#gradient)" stroke-width="1" fill-opacity="0" [style]="{'stroke-dasharray': '0, 100', 'stroke-dashoffset': '0'}"></path>
+                            </svg> -->
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <app-calc-footer 
+                (toggleView)="open = $event;"
+                [platform]="mainService.platformSelected"
+                [features]="mainService.featuresSelected"></app-calc-footer>
+        </div>
+        <div class="sidebar {{ showHr ? 'shown' : '' }}">
+            <app-hours-view
+                (toggle)="showHr = !showHr;"
+                [devHours]="mainService.devHours"
+                [nonDevHours]="mainService.nonDevHours"></app-hours-view>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="calculator-wrapper">
+      <div class="steps-wrapper">
+          <div class="main-area">
+              <div class="top-block"><a class="go-back"><i  class="fas fa-angle-left"></i><span >Back</span></a>
+                  <div>
+                      <div class="steps-selector">
+                          <button aria-controls="step-selector-list" class="selector-toggle"><span class="active-step">Step 1</span><span> of 11</span></button>
+                          
+                      </div>
+                  </div>
+              </div>
+              <div class="question">
+                  <div>
+                      <div class="steps">
+                          
+                          <div class="steps__question">
+                              <h2 class="steps__heading steps__heading--question" textfit=""> Do you need Registration &amp; Authorization? </h2>
+                              <button class="steps__question__answer"><span>Yes</span><span class="steps__question__hint"> +50.6h </span></button>
+                              <button class="steps__question__answer"> No </button>
+                          </div>
+                          
+                          <div class="steps__features">
+                              <h2 class="steps__heading steps__heading--features"> Do you need Registration &amp; Authorization? </h2>
+                              <div class="steps__features__description"> Please choose required features below: </div>
+                              <div class="steps__features__holder">
+                                  <div>
+                                      
+                                      <div class="transparent-borders">
+                                          <div class="features-list">
+                                              <div class="features-list__inner">
+                                                  <div class="features-list__heading"> Enough for MVP </div>
+                                                  
+                                                  <div class="features-list__entry selected ">
+                                                      <div class="wrapper-checkbox checkbox-checked checkbox-disabled">
+                                                          <label class="checkbox-layout" for="checkbox-2-input">
+                                                              <div class="checkbox-inner-container">
+                                                                  <input class="checkbox-input cdk-visually-hidden" type="checkbox" disabled="" tabindex="-1" aria-label="" aria-checked="true">
+                                                                  <div class="checkbox-ripple" ></div>
+                                                                  <div class="checkbox-frame"></div>
+                                                                  <div class="checkbox-background">
+                                                                      <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                          <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                                      </svg>
+                                                                      <div class="checkbox-mixedmark"></div>
+                                                                  </div>
+                                                              </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> Integration </span><span class="features-list__entry__estimate"> 0 hours </span></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="features-list__entry selected ">
+                                                      <div class="checkbox checkbox-checked">
+                                                          <label class="checkbox-layout">
+                                                              <div class="checkbox-inner-container">
+                                                                  <input class="checkbox-input cdk-visually-hidden" type="checkbox" tabindex="0" aria-label="" aria-checked="true">
+                                                                  <div class="checkbox-ripple"></div>
+                                                                  <div class="checkbox-frame"></div>
+                                                                  <div class="checkbox-background">
+                                                                      <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                          <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                                      </svg>
+                                                                      <div class="checkbox-mixedmark"></div>
+                                                                  </div>
+                                                              </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> via Email </span><span class="features-list__entry__estimate"> 12.7 hours </span></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="features-list__inner">
+                                                  
+                                                  <div class="features-list__heading ng-star-inserted"> Additional features </div>
+                                                  
+                                                  <div class="features-list__entry ng-star-inserted">
+                                                      <div class="checkbox" >
+                                                          <label class="checkbox-layout">
+                                                              <div class="checkbox-inner-container">
+                                                                  <input class="checkbox-input cdk-visually-hidden" type="checkbox"  tabindex="0" aria-label="" aria-checked="false">
+                                                                  <div class="checkbox-ripple"></div>
+                                                                  <div class="checkbox-frame"></div>
+                                                                  <div class="checkbox-background">
+                                                                      <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                          <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                                      </svg>
+                                                                      <div class="checkbox-mixedmark"></div>
+                                                                  </div>
+                                                              </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> via Twitter </span><span class="features-list__entry__estimate"> 8.8 hours </span></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="features-list__entry selected ng-star-inserted">
+                                                      <div class="checkbox checkbox-anim-unchecked-checked checkbox-checked" >
+                                                          <label class="checkbox-layout" >
+                                                              <div class="checkbox-inner-container">
+                                                                  <input class="checkbox-input cdk-visually-hidden" type="checkbox" tabindex="0" aria-label="" aria-checked="false">
+                                                                  <div class="checkbox-ripple"></div>
+                                                                  <div class="checkbox-frame"></div>
+                                                                  <div class="checkbox-background">
+                                                                      <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                          <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                                      </svg>
+                                                                      <div class="checkbox-mixedmark"></div>
+                                                                  </div>
+                                                              </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> via Google+ </span><span class="features-list__entry__estimate"> 8.8 hours </span></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div  class="bottom-border"></div>
+                                  </div>
+                              </div>
+                              <button class="steps__continue" continue-button="" name="A button" style="border: 0px; border-radius: 0px 4px; transition: background-color 0.5s ease 0s; box-shadow: none; outline: none; font-weight: 700; letter-spacing: 0.13em; font-size: 10px; height: 50px; width: 229px; color: rgb(67, 76, 99); position: absolute; overflow: hidden; background-color: rgb(250, 250, 251);"><span class="text">Save and continue</span><i class="fas fa-arrow-right"></i></button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="progress-bar-wrapper">
+                      <div>
+                          <div class="progress-bar" style="height: 2px; display: flex;">
+                              <svg viewBox="0 0 100 1" preserveAspectRatio="none" style="display: block; width: 100%;">
+                                  <defs>
+                                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+                                          <stop offset="5%" stop-color="#FF9F00"></stop>
+                                          <stop offset="95%" stop-color="#FF9F00"></stop>
+                                      </linearGradient>
+                                  </defs>
+                                  <path d="M 0,0.5 L 100,0.5" stroke="url(#gradient)" stroke-width="1" fill-opacity="0" style="stroke-dasharray: 100, 100; stroke-dashoffset: 90.9091;"></path>
+                              </svg>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="bottom-block">
+                  <div>
+                      <div class="selected-features">
+                          <div class="platform-column">
+                              <div class="heading">Platform:</div>
+                              <span class="not-selected">Not selected</span>
+                              
+                          </div>
+                          <div class="features-column">
+                              <div class="heading">Features:</div>
+                              
+                              
+                              <div class="chip chip--closable">
+                                  <div class="remove-holder">
+                                      <div class="remove hoverable">
+                                          <div class="wrapper-icon">
+                                              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 8 8" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                  <path d="M5.15957484,3.99560063 L8,6.82976331 L6.84485463,8 L4.01559,5.17709518 L1.13690562,8.15016771 L0,6.95796455 L2.85013027,4.01425524 L0,1.17053169 L1.15514537,0 L3.99411471,2.83271007 L6.73677434,0 L7.87367996,1.1925037 L5.15957484,3.99560063 Z"></path>
+                                              </svg>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="select hoverable " > Registration &amp; Authorization </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="height-toggle"><i class="fas fa-chevron-up"></i></div>
+              </div>
+          </div>
+          <div class="sidebar">
+              <div class="sidebar__handle">
+                  <div class="sidebar__handle__icon"><i class="fas fa-chevron-up"></i></div>
+                  <div class="sidebar__handle__text">Estimate</div>
+              </div>
+              <div class="hours-report-block">
+                  <div>
+                      <div class="hours-report">
+                          <div class="time-section time-total">
+                              <div class="description"> Summary time </div>
+                              <div class="time">
+                                  <div class="average">
+                                      <div>
+                                          <div class="odometer-like"><span class="spin-entry"> 0h </span><span class="spin-entry"> 0h </span></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="custom-accordion">
+                              <div class="expansion-panel">
+                                  <div class="expansion-panel-header" style="height: 79px;">
+                                      <span class="wrapper-content">
+                                          <div class="time-section"><div  class="description"> Development time </div>
+                                              <div class="time">
+                                                  <div  class="average">
+                                                      <div >
+                                                          <div class="odometer-like"><span class="spin-entry"> 0h </span><span class="spin-entry"> 0h </span></div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </span>
+                                      <span class="expansion-indicator" style="transform: rotate(0deg);"></span>
+                                  </div>
+                                  <div class="expansion-panel-content" style="height: 0px; visibility: hidden;">
+                                      <div class="expansion-panel-body">
+                                          <div class="time-estimations-holder">
+                                              <div>
+                                                  <div class="transparent-borders">
+                                                      <section class="time-estimations-inner">
+                                                          <div class="time-estimation no-line" style="">
+                                                              <div class="description">No features selected</div>
+                                                          </div>
+                                                      </section>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="expansion-panel">
+                                  <div class="expansion-panel-header" style="height: 79px;">
+                                      <span class="wrapper-content">
+                                          <div class="time-section">
+                                              <div  class="description"> Non-dev<br> time </div>
+                                              <div class="time">
+                                                  <div  class="average">
+                                                      <div >
+                                                          <div  class="odometer-like"><span  class="spin-entry"> 0h </span><span class="spin-entry"> 0h </span></div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div> -->

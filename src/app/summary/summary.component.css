@@ -1,0 +1,88 @@
+.pdf-subscription div {
+    border: 1px solid #ccc;
+}
+
+.pdf-subscription .head-sec {
+    color: grey;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px 5px 0 0;
+    padding: 0px 20px;
+}
+
+.pdf-subscription .input-sec {
+    padding: 30px 20px;
+}
+
+.pdf-subscription .input-sec label {
+    float: left;
+    color: gray;
+}
+
+.pdf-subscription .input-sec input {
+    width: 100%;
+    height: 34px;
+    margin-top: 10px;
+    border-color: lightgrey;
+    border: 0.5px solid llight;
+    border-radius: 4px;
+    box-shadow: none !important;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.pdf-subscription .btn-sec {
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
+.pdf-subscription.modal {
+    transition: transform .5s;
+}
+.pdf-subscription.modal .message {
+    text-align: center;
+    margin: 0;
+    background: #18cc0f;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 0px;
+}
+.pdf-subscription.modal .cross-icon {
+    font-size: 24px;
+    text-align: right;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.pdf-subscription.modal .btn-sec {
+    text-align: center;
+}
+.pdf-subscription.modal .btn-sec button{
+    background-color: #18cc0f;
+    width: 192px;
+    height: 50px;
+    border-radius: 4px;
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    font-weight: 800;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s;
+    width: 100%;
+}
+
+.pdf-subscription.modal .btn-sec button:disabled {
+    background-color: #ccc;
+}
+
+.pdf-subscription.modal{
+    position: absolute;
+    background: white;
+    padding: 15px 50px 50px 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    box-shadow: 0px 2px 3px 1px #ccc;
+    min-width: 400px;
+}

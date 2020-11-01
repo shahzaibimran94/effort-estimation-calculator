@@ -1,0 +1,48 @@
+<div class="bottom-block" [ngStyle]="{ 'height': open ? null : 'calc(100% - 100px)' }">
+    <div>
+        <div class="selected-features">
+            <div class="platform-column">
+                <div class="heading">Platform:</div>
+                <span class="not-selected" *ngIf="!platform">Not selected</span>
+                <div class="chip chip--closable" *ngIf="platform" (click)="gotoStep1()">
+                    <div class="select hoverable">{{ platform }}</div>
+                </div>
+            </div>
+            <div class="features-column">
+                <div class="heading">Features:</div>
+                <span class="not-selected" *ngIf="!features.length">Not selected</span>
+                <ng-container *ngIf="features.length > 0">
+                    <div class="chip chip--closable" *ngFor="let feature of features;">
+                        <div class="remove-holder" (click)="removeFeature(feature.id)">
+                            <div class="remove hoverable">
+                                <div class="wrapper-icon">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 8 8" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                        <path d="M5.15957484,3.99560063 L8,6.82976331 L6.84485463,8 L4.01559,5.17709518 L1.13690562,8.15016771 L0,6.95796455 L2.85013027,4.01425524 L0,1.17053169 L1.15514537,0 L3.99411471,2.83271007 L6.73677434,0 L7.87367996,1.1925037 L5.15957484,3.99560063 Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select hoverable " (click)="gotoFeatureStep(feature)"> {{ feature.title }} </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="height-toggle" (click)="toggle()"><i class="fas fa-chevron-{{ open ? 'up' : 'down' }}"></i></div>
+</div>
+<!-- <div class="bottom-block">
+    <div>
+        <div class="selected-features">
+            <div class="platform-column">
+                <div class="heading">Platform:</div>
+               <span class="not-selected">Not selected</span>
+               
+            </div>
+            <div class="features-column">
+                <div class="heading">Features:</div>
+               
+               <span class="not-selected"> Not selected </span></div>
+        </div>
+    </div>
+    <div class="height-toggle"><i class="fas fa-chevron-up"></i></div>
+</div> -->

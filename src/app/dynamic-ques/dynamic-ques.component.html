@@ -1,0 +1,90 @@
+
+    <div class="steps">
+        <div class="steps__question">
+            <h2 class="steps__heading steps__heading--question" textfit=""> {{ mainService.currentStepDetail.question }} </h2>
+            <ng-container  *ngIf="!decision">
+              <button class="steps__question__answer" (click)="selectFeature(true)"><span>Yes</span><span class="steps__question__hint"> +{{ mainService.currentStepHours }}h </span></button>
+              <button class="steps__question__answer" (click)="selectFeature(false)"> No </button>
+            </ng-container>
+        </div>
+        <div class="steps__features" *ngIf="decision">
+            <div class="steps__features__description"> Please choose required features below: </div>
+            <div class="steps__features__holder">
+                
+                    <div class="transparent-borders">
+                        <div class="features-list">
+                            <div class="features-list__inner">
+                                <div class="features-list__heading"> Enough for MVP </div>
+                                <ng-container *ngFor="let feature of mainService.currentStepDetail.features">
+                                    <div class="features-list__entry " *ngIf="feature.isMvp">
+                                        <div class="wrapper-checkbox {{ feature.isSelected ? 'checkbox-checked' : '' }} {{ feature.title === 'Integration' ? 'checkbox-disabled' : '' }}">
+                                            <ng-container *ngIf="feature.title === 'Integration'">
+                                                <label class="checkbox-layout" for="checkbox-2-input">
+                                                    <div class="checkbox-inner-container">
+                                                        <input class="checkbox-input cdk-visually-hidden" type="checkbox" disabled="" tabindex="-1" aria-label="" aria-checked="true">
+                                                        <div class="checkbox-ripple" ></div>
+                                                        <div class="checkbox-frame"></div>
+                                                        <div class="checkbox-background">
+                                                            <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                            </svg>
+                                                            <div class="checkbox-mixedmark"></div>
+                                                        </div>
+                                                    </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> {{ feature.title }} </span><span class="features-list__entry__estimate"> {{ feature.hrs }} hours </span></span>
+                                                </label>
+                                            </ng-container>
+                                            <ng-container *ngIf="feature.title !== 'Integration'">
+                                                <label class="checkbox-layout" for="checkbox-2-input" (click)="addOrRemove(feature.id, !feature.isSelected)">
+                                                    <div class="checkbox-inner-container">
+                                                        <input class="checkbox-input cdk-visually-hidden" type="checkbox" disabled="" tabindex="-1" aria-label="" aria-checked="true">
+                                                        <div class="checkbox-ripple" ></div>
+                                                        <div class="checkbox-frame"></div>
+                                                        <div class="checkbox-background">
+                                                            <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                                <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                            </svg>
+                                                            <div class="checkbox-mixedmark"></div>
+                                                        </div>
+                                                    </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> {{ feature.title }} </span><span class="features-list__entry__estimate"> {{ feature.hrs }} hours </span></span>
+                                                </label>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="features-list__inner">
+                                <div class="features-list__heading ng-star-inserted"> Additional features </div>
+                                <ng-container *ngFor="let feature of mainService.currentStepDetail.features; let i = index;">
+                                  <div class="features-list__entry ng-star-inserted" *ngIf="!feature.isMvp">
+                                    <div class="checkbox {{ feature.isSelected ? 'checkbox-checked' : '' }}" >
+                                        <label class="checkbox-layout" (click)="addOrRemove(feature.id, !feature.isSelected)">
+                                            <div class="checkbox-inner-container">
+                                                <input class="checkbox-input cdk-visually-hidden" type="checkbox" checked="true">
+                                                <div class="checkbox-ripple"></div>
+                                                <div class="checkbox-frame"></div>
+                                                <div class="checkbox-background">
+                                                    <svg xml:space="preserve" class="checkbox-checkmark" focusable="false" version="1.1" viewBox="0 0 24 24">
+                                                        <path class="checkbox-checkmark-path" d="M4.1,12.7 9,17.6 20.3,6.3" fill="none" stroke="white"></path>
+                                                    </svg>
+                                                    <div class="checkbox-mixedmark"></div>
+                                                </div>
+                                            </div><span class="checkbox-label"><span style="display:none">&nbsp;</span><span class="features-list__entry__title"> {{ feature.title }} </span><span class="features-list__entry__estimate"> {{ feature.hrs }} hours </span></span>
+                                        </label>
+                                    </div>
+                                  </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="bottom-border"></div>
+               
+            </div>
+            <button
+              (click)="moveNext()" 
+              class="steps__continue" 
+              continue-button="" 
+              name="A button" 
+              style="border: 0px; border-radius: 0px 4px; transition: background-color 0.5s ease 0s; box-shadow: none; outline: none; font-weight: 700; letter-spacing: 0.13em; font-size: 10px; height: 50px; width: 229px; color: rgb(67, 76, 99); position: absolute; overflow: hidden; background-color: rgb(250, 250, 251);">
+              <span class="text">Save and continue</span><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>

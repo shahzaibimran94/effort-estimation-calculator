@@ -1,0 +1,22 @@
+<main>
+  <div class="calc-container">
+    <ng-container *ngIf="!hasCompleted">
+        <app-home
+            *ngIf="!appType && !hasSelected" 
+            (selected)="getSelected($event)"></app-home>
+        <app-select-app 
+            *ngIf="appType && !hasSelected"
+            [appTiles]="appTiles"
+            (clearAppType)="appType = ''"
+            (hasSelected)="hasSelected = true;"></app-select-app>
+        <app-question-view 
+            (back)="hasSelected = false;"
+            (completed)="hasCompleted = $event;"
+            *ngIf="hasSelected"></app-question-view>    
+    </ng-container>
+    <app-summary 
+        (back)="hasCompleted = false;"
+        *ngIf="hasCompleted"></app-summary>
+    </div>
+</main>
+<!-- <app-summary></app-summary> -->
